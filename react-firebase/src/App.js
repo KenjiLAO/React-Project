@@ -1,9 +1,11 @@
 import './App.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useCallback } from 'react';
 import { useEffect } from 'react';
 import { findAll } from './services/tekken';
+import Home from './component/Home';
 import TekkenCharacter from './component/TekkenCharacter';
+import { Routes , Route } from 'react-router-dom';
 
 const App = () => {
 
@@ -14,6 +16,8 @@ const App = () => {
     gender: "male",
     moveList: []
   }
+
+  //const context = useContext(myAppContext)
 
   const [tekkenCharacter, setTekkenCharacter] = useState([firstCharacter]);
 
@@ -54,19 +58,27 @@ const App = () => {
     return () => {
       console.log()
     }
-
   }, [fetchTekkenCharacterHandler]);
 
   return (
-    <div>
-      <h2>C'est parti</h2>
-      <button onClick={fetchTekkenCharacterHandler}>Pas ce bouton</button>
-      {loading &&
-        <p>loading...</p>
-      }
+    <>
+      <div>
+        <h2>C'est parti</h2>
+        <button onClick={fetchTekkenCharacterHandler}>Pas ce bouton</button>
+        {loading &&
+          <p>loading...</p>
+        }
+      </div>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path='TekkenCharacter' element={ <TekkenCharacter items={tekkenCharacter}/> } />
+        </Routes>
+      </div>
+    </>
+    
       
-      <TekkenCharacter items={tekkenCharacter}/>
-    </div>
+
   );
 }
 
