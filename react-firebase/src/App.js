@@ -3,67 +3,69 @@ import { useState } from 'react';
 import { useCallback } from 'react';
 import { useEffect } from 'react';
 import { findAll } from './services/tekken';
+import TekkenCharacter from './component/TekkenCharacter';
 
 const App = () => {
 
-  const [tekkenCharacter, setTekkenCharacter] = useState([]);
-  const [error, setError] = useState(null);
-
-  const testFetchHandler = () => {
-    fetch('https://swapi.dev/api/people/1').then((httpResponse) => {
-      console.log('reussite! ', httpResponse)
-      return httpResponse.json()
-    }).then((data) => {
-      console.log('mes donnees ', data)
-    }).catch((error) => {
-      console.log('j \'ai une belle erreur', error)
-    })
+  const firstCharacter = {
+    id: 0,
+    characterFirstName: "Kazuya",
+    characterLastName: "Mishima",
+    gender: "male",
+    moveList: []
   }
 
-  const fetchTekkenCharacterHandler = useCallback(async () => {
+  const [tekkenCharacter, setTekkenCharacter] = useState([firstCharacter]);
+
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null);
+
+  const fetchTekkenCharacterHandler = useCallback(async (event) => {
+    setLoading(true)
+    const loadedTekkenCharacter = [];
+
     try {
+      event.preventDefault()
       const response = await findAll();
+      console.log(response)
 
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
-      }
-
-      const data = await response.json();
-
-      const loadedTekkenCharacter = [];
-
-      for (const key in data) {
+      for (const key in response) {
         loadedTekkenCharacter.push({
-          id: key,
-          characterFirstName: data[key].characterFirstName,
-          characterLastName: data[key].characterLastName,
-          gender: data[key].gender,
-          moveList: data[key].moveList
+          id: response[key].id,
+          characterFirstName: response[key].characterFirstName,
+          characterLastName: response[key].characterLastName,
+          gender: response[key].gender,
+          moveList: response[key].moveList
         });
       }
+
       setTekkenCharacter(loadedTekkenCharacter);
+      setLoading(false)
       console.log(loadedTekkenCharacter)
+      console.log(tekkenCharacter)
     } catch (error) {
+      console.log(error)
       setError(error.message);
     }
-  }, []);
+  }, [tekkenCharacter]);
 
   useEffect(() => {
     fetchTekkenCharacterHandler();
-
     return () => {
       console.log()
     }
 
   }, [fetchTekkenCharacterHandler]);
 
-
-
   return (
     <div>
       <h2>C'est parti</h2>
-      <button onClick={testFetchHandler} >HTTP</button>
-      <button onClick={fetchTekkenCharacterHandler} >Pas ce bouton</button>
+      <button onClick={fetchTekkenCharacterHandler}>Pas ce bouton</button>
+      {loading &&
+        <p>loading...</p>
+      }
+      
+      <TekkenCharacter items={tekkenCharacter}/>
     </div>
   );
 }
