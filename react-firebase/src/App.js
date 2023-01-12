@@ -6,6 +6,7 @@ import { findAll } from './services/tekken';
 import Home from './component/Home';
 import TekkenCharacter from './component/TekkenCharacter';
 import { Routes , Route } from 'react-router-dom';
+import AddCharacter from './component/AddCharacter';
 
 const App = () => {
 
@@ -20,12 +21,13 @@ const App = () => {
   //const context = useContext(myAppContext)
 
   const [tekkenCharacter, setTekkenCharacter] = useState([firstCharacter]);
+  const [expenses, setExpenses] = useState(firstCharacter);
 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null);
 
   const fetchTekkenCharacterHandler = useCallback(async (event) => {
-    setLoading(true)
+    setLoading(false)
     const loadedTekkenCharacter = [];
 
     try {
@@ -44,7 +46,7 @@ const App = () => {
       }
 
       setTekkenCharacter(loadedTekkenCharacter);
-      setLoading(false)
+      setLoading(true)
       console.log(loadedTekkenCharacter)
       console.log(tekkenCharacter)
     } catch (error) {
@@ -60,6 +62,12 @@ const App = () => {
     }
   }, [fetchTekkenCharacterHandler]);
 
+  const addExpenseHandler = (expense) => {
+    setExpenses((myExpense) => {
+      return [expense, ...myExpense];
+    });
+  };
+
   return (
     <>
       <div>
@@ -70,15 +78,14 @@ const App = () => {
         }
       </div>
       <div className="App">
+      
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path='TekkenCharacter' element={ <TekkenCharacter items={tekkenCharacter}/> } />
+          <Route path='TekkenCharacter/AddCharacter' element={ <AddCharacter onAddExpense={addExpenseHandler} /> } />
         </Routes>
       </div>
     </>
-    
-      
-
   );
 }
 

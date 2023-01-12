@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function TekkenCharacter(props) {
 
     return (
@@ -12,14 +14,14 @@ function TekkenCharacter(props) {
                                 <h2>Character lastname: {character.characterLastName}</h2>
                                 <h2>Character gender: {character.gender}</h2>
                                 <h2>MoveList: {character.moveList}</h2>
-
                                 <hr />
                             </div>
-
                         </>
                     );
                 })}
             </div>
+
+            <Link to="AddCharacter">Add a new character</Link>
         </>
 
     );
