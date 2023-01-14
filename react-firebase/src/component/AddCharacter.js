@@ -2,9 +2,9 @@ import Form from "./Form";
 
 const AddCharacter = props => {
 
-    const saveCharacterDataHandler = (enteredExpenseData) => {
+    const saveCharacterDataHandler = (enteredCharacterData) => {
         const Data = {
-            ...enteredExpenseData,
+            ...enteredCharacterData,
             id: Math.random().toString(),
         };
         props.onAddCharacter(Data);
@@ -13,7 +13,7 @@ const AddCharacter = props => {
     return (
         <div>
             <Form
-                onSaveExpenseData={saveCharacterDataHandler}
+                onSaveCharacterData={saveCharacterDataHandler}
             />
         </div>
     );

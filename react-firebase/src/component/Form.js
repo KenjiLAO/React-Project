@@ -16,7 +16,7 @@ function Form(props) {
             gender : genderEntered,
             moveList : moveListEntered
         }
-        props.onSaveExpenseData(prop);
+        props.onSaveCharacterData(prop);
         console.log(props)
         console.log(prop)
         setfirstNameEntered('');

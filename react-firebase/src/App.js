@@ -5,23 +5,31 @@ import { useEffect } from 'react';
 import { findAll } from './services/tekken';
 import Home from './component/Home';
 import TekkenCharacter from './component/TekkenCharacter';
-import { Routes , Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import AddCharacter from './component/AddCharacter';
 
 const App = () => {
 
-  const firstCharacter = {
+  const myCharacters = [{
     id: 0,
-    characterFirstName: "Kazuya",
-    characterLastName: "Mishima",
-    gender: "male",
+    characterFirstName: "e",
+    characterLastName: "e",
+    gender: "female",
     moveList: []
-  }
+  }, {
+    id: 1,
+    characterFirstName: "5456",
+    characterLastName: "esqbdw",
+    gender: "female",
+    moveList: []
+  }]
 
-  //const context = useContext(myAppContext)
+  const context = useContext(myCharacters)
 
-  const [tekkenCharacter, setTekkenCharacter] = useState([firstCharacter]);
-  const [expenses, setExpenses] = useState(firstCharacter);
+  const [tekkenCharacter, setTekkenCharacter] = useState(myCharacters);
+  const [addCharacter, setAddCharacter] = useState(myCharacters);
+
+  const [changeCharacter, setChangeCharacter] = useState(false);
 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null);
@@ -46,6 +54,8 @@ const App = () => {
       }
 
       setTekkenCharacter(loadedTekkenCharacter);
+      setChangeCharacter(true)
+      console.log(changeCharacter)
       setLoading(true)
       console.log(loadedTekkenCharacter)
       console.log(tekkenCharacter)
@@ -62,9 +72,9 @@ const App = () => {
     }
   }, [fetchTekkenCharacterHandler]);
 
-  const addExpenseHandler = (expense) => {
-    setExpenses((myExpense) => {
-      return [expense, ...myExpense];
+  const addCharacterHandler = (character) => {
+    setAddCharacter((myCharacter) => {
+      return [character, ...myCharacter];
     });
   };
 
@@ -77,12 +87,12 @@ const App = () => {
           <p>loading...</p>
         }
       </div>
+
       <div className="App">
-      
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path='TekkenCharacter' element={ <TekkenCharacter items={tekkenCharacter}/> } />
-          <Route path='TekkenCharacter/AddCharacter' element={ <AddCharacter onAddExpense={addExpenseHandler} /> } />
+          <Route path='TekkenCharacter' element={<TekkenCharacter items={addCharacter} />} />
+          <Route path='TekkenCharacter/AddCharacter' element={<AddCharacter onAddCharacter={addCharacterHandler} />} />
         </Routes>
       </div>
     </>
