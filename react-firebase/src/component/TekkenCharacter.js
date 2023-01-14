@@ -16,23 +16,31 @@ function TekkenCharacter(props) {
         console.log(list)
     }
 
+    let itemToRender;
+    if(list) {
+        itemToRender = list.items.map((myCharacter) => {
+            return (
+                <>
+                    <div>
+                        <h2>Character Firstname: {myCharacter.characterFirstName}</h2>
+                        <h2>Character lastname: {myCharacter.characterLastName}</h2>
+                        <h2>Character gender: {myCharacter.gender}</h2>
+                        <h2>MoveList: {myCharacter.moveList}</h2>
+                        <button onClick={() => handleRemoveItem(myCharacter.id)}> x </button>
+                    </div>
+                </>
+            );
+        })
+    }
+    else{
+        itemToRender = "Loading.... it crashed";
+    }
+
     return (
         <>
             <div>Tekken character</div>
             <div>
-                {list.items.map((myCharacter) => {
-                    return (
-                        <>
-                            <div>
-                                <h2>Character Firstname: {myCharacter.characterFirstName}</h2>
-                                <h2>Character lastname: {myCharacter.characterLastName}</h2>
-                                <h2>Character gender: {myCharacter.gender}</h2>
-                                <h2>MoveList: {myCharacter.moveList}</h2>
-                                <button onClick={() => handleRemoveItem(myCharacter.id)}> x </button>
-                            </div>
-                        </>
-                    );
-                })}
+                {itemToRender}
             </div>
 
             <Link to="AddCharacter">Add a new character</Link>

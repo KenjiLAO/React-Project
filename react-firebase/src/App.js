@@ -12,15 +12,15 @@ const App = () => {
 
   const myCharacters = [{
     id: 0,
-    characterFirstName: "e",
-    characterLastName: "e",
-    gender: "female",
+    characterFirstName: "Kazuya",
+    characterLastName: "Mishima",
+    gender: "male",
     moveList: []
   }, {
     id: 1,
-    characterFirstName: "5456",
-    characterLastName: "esqbdw",
-    gender: "female",
+    characterFirstName: "Asuka",
+    characterLastName: "Kazama",
+    gender: "male",
     moveList: []
   }]
 

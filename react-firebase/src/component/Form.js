@@ -11,8 +11,9 @@ function Form(props) {
         event.preventDefault();
 
         const prop = {
-            firstName : firstNameEntered,
-            lastName : lastNameEntered,
+            id : Math.random(),
+            characterFirstName : firstNameEntered,
+            characterLastName : lastNameEntered,
             gender : genderEntered,
             moveList : moveListEntered
         }
