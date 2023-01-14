@@ -1,4 +1,5 @@
 import Form from "./Form";
+import { Link } from "react-router-dom";
 
 const AddCharacter = props => {
 
@@ -11,11 +12,16 @@ const AddCharacter = props => {
     };
 
     return (
-        <div>
+        <>
+            <div>
             <Form
                 onSaveCharacterData={saveCharacterDataHandler}
             />
         </div>
+        <div>
+            <Link to="../TekkenCharacter">See all characters</Link>
+        </div>
+        </>
     );
 }
 
