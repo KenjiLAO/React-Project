@@ -16,6 +16,13 @@ const App = () => {
     characterLastName: "Mishima",
     gender: "male",
     moveList: []
+  },
+  {
+    id: 1,
+    characterFirstName: "Heihachi",
+    characterLastName: "Mishima",
+    gender: "male",
+    moveList: []
   }]
 
   const context = useContext(myCharacters)

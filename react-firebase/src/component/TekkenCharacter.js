@@ -5,19 +5,19 @@ function TekkenCharacter(props) {
     const [list, setList] = useState(props);
 
     const handleRemoveItem = (Id) => {
-        const maList = list.items.filter((character) => { return character.id !== Id })
-        console.log(maList)
+        setList(list.items.filter((character) => { return character.id !== Id }))
         console.log(list.items)
-
-        setList({...list.items, ...maList});
+        console.log(list)
 
         alert('button clicked')
         console.log(Id)
         console.log(list)
+        
     }
 
     let itemToRender;
-    if(list) {
+    if (list.items) {
+        console.log(itemToRender)
         itemToRender = list.items.map((myCharacter) => {
             return (
                 <>
@@ -31,9 +31,25 @@ function TekkenCharacter(props) {
                 </>
             );
         })
+        console.log(itemToRender)
     }
-    else{
-        itemToRender = "Loading.... it crashed";
+    else {
+        console.log(itemToRender)
+        console.log(list)
+        itemToRender = list.map((myCharacter) => {
+            return (
+                <>
+                    <div>
+                        <h2>Character Firstname: {myCharacter.characterFirstName}</h2>
+                        <h2>Character lastname: {myCharacter.characterLastName}</h2>
+                        <h2>Character gender: {myCharacter.gender}</h2>
+                        <h2>MoveList: {myCharacter.moveList}</h2>
+                        <button onClick={() => handleRemoveItem(myCharacter.id)}> x </button>
+                    </div>
+                </>
+            );
+        })
+        console.log(itemToRender)
     }
 
     return (
