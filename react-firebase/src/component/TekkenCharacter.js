@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Card from "./Card";
 
 function TekkenCharacter(props) {
     const [list, setList] = useState(props);
@@ -13,11 +14,11 @@ function TekkenCharacter(props) {
             setList(list.filter((character) => { return character.id !== Id }))
             alert('button clicked')
         }
-        
+
         console.log(list.items)
         console.log(list)
         console.log(Id)
-        
+
     }
 
     let itemToRender;
@@ -27,13 +28,15 @@ function TekkenCharacter(props) {
         itemToRender = list.items.map((myCharacter) => {
             return (
                 <>
-                    <div>
-                        <h2>Character Firstname: {myCharacter.characterFirstName}</h2>
-                        <h2>Character lastname: {myCharacter.characterLastName}</h2>
-                        <h2>Character gender: {myCharacter.gender}</h2>
-                        <h2>MoveList: {myCharacter.moveList}</h2>
-                        <button onClick={() => handleRemoveItem(myCharacter.id)}> x </button>
-                    </div>
+                    <Card className="character">
+                        <div>
+                            <h2>Character Firstname: {myCharacter.characterFirstName}</h2>
+                            <h2>Character lastname: {myCharacter.characterLastName}</h2>
+                            <h2>Character gender: {myCharacter.gender}</h2>
+                            <h2>MoveList: {myCharacter.moveList}</h2>
+                            <button onClick={() => handleRemoveItem(myCharacter.id)}> Delete character </button>
+                        </div>
+                    </Card>
                 </>
             );
         })
@@ -45,13 +48,15 @@ function TekkenCharacter(props) {
         itemToRender = list.map((myCharacter) => {
             return (
                 <>
-                    <div>
-                        <h2>Character Firstname: {myCharacter.characterFirstName}</h2>
-                        <h2>Character lastname: {myCharacter.characterLastName}</h2>
-                        <h2>Character gender: {myCharacter.gender}</h2>
-                        <h2>MoveList: {myCharacter.moveList}</h2>
-                        <button onClick={() => handleRemoveItem(myCharacter.id)}> x </button>
-                    </div>
+                    <Card className="character">
+                        <div>
+                            <h2>Character Firstname: {myCharacter.characterFirstName}</h2>
+                            <h2>Character lastname: {myCharacter.characterLastName}</h2>
+                            <h2>Character gender: {myCharacter.gender}</h2>
+                            <h2>MoveList: {myCharacter.moveList}</h2>
+                            <button onClick={() => handleRemoveItem(myCharacter.id)}> Delete character </button>
+                        </div>
+                    </Card>
                 </>
             );
         })
@@ -62,7 +67,9 @@ function TekkenCharacter(props) {
         <>
             <div>Tekken character</div>
             <div>
-                {itemToRender}
+                <Card>
+                    {itemToRender}
+                </Card>
             </div>
 
             <Link to="AddCharacter">Add a new character</Link>
