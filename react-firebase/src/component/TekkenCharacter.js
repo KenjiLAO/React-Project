@@ -5,18 +5,24 @@ function TekkenCharacter(props) {
     const [list, setList] = useState(props);
 
     const handleRemoveItem = (Id) => {
-        setList(list.items.filter((character) => { return character.id !== Id }))
+        if (list.items) {
+            setList(list.items.filter((character) => { return character.id !== Id }))
+            alert('button clicked')
+        }
+        if (list) {
+            setList(list.filter((character) => { return character.id !== Id }))
+            alert('button clicked')
+        }
+        
         console.log(list.items)
         console.log(list)
-
-        alert('button clicked')
         console.log(Id)
-        console.log(list)
         
     }
 
     let itemToRender;
     if (list.items) {
+        console.log(list)
         console.log(itemToRender)
         itemToRender = list.items.map((myCharacter) => {
             return (
